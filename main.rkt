@@ -68,7 +68,7 @@
                                                           s)))])
                            (interval->semitone s)
                            s))))]
-   [("-r" "--repeat") r (format "Number of times to quiz (default ~a)" (repeat))
+   [("-r" "--repeat") r "Number of times to quiz (default 10)"
     (repeat (if-let ([n (string->number r)]) 
                     n
                     (error "Repeat must be a number.")))]
