@@ -63,7 +63,9 @@
 
 
 (define (read-note n)
-  (let* ([l (reverse (string->list n))]
+  (let* ([lst (string->list n)]
+         [l (reverse (cons (char-upcase (first lst))
+                           (rest lst)))]
          [o (string->number (string (first l)))]
          [a 0])
     (when o
