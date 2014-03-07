@@ -79,18 +79,32 @@
       (case c
         [(#\b) (dec! a)]
         [(#\#) (inc! a)]))
-    (+ (hash-ref notes->semitones (char-upcase (last l)))
-       a
-       (* (if o (add1 o) 0) 12))))
+    (if o
+        (+ (hash-ref notes->semitones (char-upcase (last l)))
+           (* (add1 o) 12)
+           a)
+        (clamp-rotate (+ (hash-ref notes->semitones (char-upcase (last l)))
+                         a)
+                      0 11))))
 
 (module+ test
   (check-equal? (read-note "C")
+                0)
+  (check-equal? (read-note "Cb")
+                11)
+  (check-equal? (read-note "Cbb")
+                10)
+  (check-equal? (read-note "B")
+                11)
+  (check-equal? (read-note "B#")
                 0)
   (check-equal? (read-note "C0")
                 12)
   (check-equal? (read-note "C-1")
                 0)
   (check-equal? (read-note "B3")
+                59)
+  (check-equal? (read-note "Cb4")
                 59)
   (check-equal? (read-note "Db")
                 1)
