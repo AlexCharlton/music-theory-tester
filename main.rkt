@@ -58,7 +58,7 @@
    #:once-each
    [("-d" "--descending") "Include descending intervals"
     (descending #t)]
-   [("-i" "--intervals") i "Intervals to quiz on e.g: \"3 bIV\""
+   [("-i" "--intervals") i "Intervals to quiz on e.g: \"3 bIV\" (default '3 5 7 9')"
     (intervals (for/list ([s (string-split i)])
                  (if-let ([n (string->number s)]) 
                          n
@@ -68,7 +68,7 @@
                                                           s)))])
                            (interval->semitone s)
                            s))))]
-   [("-r" "--repeat") r "Number of times to quiz"
+   [("-r" "--repeat") r (format "Number of times to quiz (default ~a)" (repeat))
     (repeat (if-let ([n (string->number r)]) 
                     n
                     (error "Repeat must be a number.")))]
