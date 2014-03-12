@@ -75,10 +75,11 @@
         (set! o (- o))))
     (for ([c l])
       #:break (not (or (eq? c #\b)
-                       (eq? c #\#)))
+                       (eq? c #\#)
+                       (eq? c #\s)))
       (case c
         [(#\b) (dec! a)]
-        [(#\#) (inc! a)]))
+        [(#\# #\s) (inc! a)]))
     (if o
         (+ (hash-ref notes->semitones (char-upcase (last l)))
            (* (add1 o) 12)
