@@ -38,9 +38,12 @@
                               (for/sum ([_ (range repeat)])
                                 (if (thunk) 1 0)))
                             '())])
-    (printf "~a/~a correct\nTook ~a seconds\n"
+    (printf "\nFinished!\n~a/~a correct\nTook ~a seconds\n"
             (first correct) repeat
             (exact->inexact (/ (exact-round (/ time 100))
+                               10)))
+    (printf "Averaged ~a seconds per answer\n"
+            (exact->inexact (/ (exact-round (/ time repeat 100))
                                10)))))
 
 
